@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>قوانين الآلات الحرارية - Machines Thermiques</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .search-box {
+            padding: 20px 40px;
+            background: #f8f9fa;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1.1em;
+            transition: border-color 0.3s;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-right: 5px solid #667eea;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .section h2 {
+            color: #1e3c72;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .section h3 {
+            color: #2a5298;
+            font-size: 1.4em;
+            margin: 25px 0 15px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .section h3::before {
+            content: "📐";
+            margin-left: 10px;
+        }
+
+        .law-box {
+            background: white;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .formula {
+            background: #e8eaf6;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1em;
+            text-align: center;
+            border: 2px dashed #667eea;
+            direction: ltr;
+        }
+
+        .note {
+            background: #fff3cd;
+            border-right: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+
+        .note::before {
+            content: "💡 ملاحظة: ";
+            font-weight: bold;
+            color: #856404;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            text-align: right;
+            font-weight: bold;
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        tr:hover {
+            background: #f8f9fa;
+        }
+
+        .highlight {
+            background: #d4edda;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        footer {
+            background: #1e3c72;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+            .search-box {
+                display: none;
+            }
+            .section {
+                break-inside: avoid;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+            .content {
+                padding: 20px;
+            }
+            .section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📚 قوانين الآلات الحرارية</h1>
+            <p>ملخص شامل لجميع القوانين والمعادلات الأساسية</p>
+        </header>
+
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="🔍 ابحث عن قانون أو معادلة...">
+        </div>
+
+        <div class="content" id="content">
+            <!-- القانون الأول للديناميكا الحرارية -->
+            <div class="section">
+                <h2>⚡ القانون الأول للديناميكا الحرارية (First Law of Thermodynamics)</h2>
+
+                <div class="law-box">
+                    <h3>المبدأ الأساسي</h3>
+                    <p>الطاقة لا تفنى ولا تُستحدث من العدم، بل تتحول من شكل إلى آخر</p>
+                    <div class="formula">ΔU = Q - W</div>
+                    <p><strong>حيث:</strong></p>
+                    <ul>
+                        <li><span class="highlight">ΔU</span>: التغير في الطاقة الداخلية (Internal Energy Change)</li>
+                        <li><span class="highlight">Q</span>: الحرارة المضافة للنظام (Heat Added)</li>
+                        <li><span class="highlight">W</span>: الشغل المنجز بواسطة النظام (Work Done by System)</li>
+                    </ul>
+                </div>
+
+                <div class="law-box">
+                    <h3>الصيغ البديلة</h3>
+                    <div class="formula">Q = ΔU + W</div>
+                    <div class="formula">dU = δQ - δW</div>
+                    <div class="formula">δQ = dU + PdV</div>
+                </div>
+
+                <div class="note">
+                    إذا كانت Q موجبة: النظام يكتسب حرارة<br>
+                    إذا كانت W موجبة: النظام ينجز شغلاً
+                </div>
+            </div>
+
+            <!-- القانون الثاني للديناميكا الحرارية -->
+            <div class="section">
+                <h2>🔥 القانون الثاني للديناميكا الحرارية (Second Law of Thermodynamics)</h2>
+
+                <div class="law-box">
+                    <h3>صيغة كلوزيوس (Clausius Statement)</h3>
+                    <p>من المستحيل نقل الحرارة من جسم بارد إلى جسم ساخن دون بذل شغل خارجي</p>
+                </div>
+
+                <div class="law-box">
+                    <h3>صيغة كلفن-بلانك (Kelvin-Planck Statement)</h3>
+                    <p>من المستحيل بناء آلة حرارية تحول كل الحرارة إلى شغل (الكفاءة 100% مستحيلة)</p>
+                </div>
+
+                <div class="law-box">
+                    <h3>الإنتروبيا (Entropy)</h3>
+                    <div class="formula">ΔS ≥ 0</div>
+                    <div class="formula">dS = δQ/T (عملية عكوسية)</div>
+                    <div class="formula">ΔS = ∫(δQ/T)</div>
+                    <p>الإنتروبيا في نظام معزول تزداد دائماً أو تبقى ثابتة</p>
+                </div>
+            </div>
+
+            <!-- كفاءة الآلات الحرارية -->
+            <div class="section">
+                <h2>⚙️ كفاءة الآلات الحرارية (Thermal Efficiency)</h2>
+
+                <div class="law-box">
+                    <h3>كفاءة محرك حراري (Heat Engine)</h3>
+                    <div class="formula">η = W/Q_H = (Q_H - Q_C)/Q_H = 1 - Q_C/Q_H</div>
+                    <p><strong>حيث:</strong></p>
+                    <ul>
+                        <li><span class="highlight">η</span>: الكفاءة (Efficiency)</li>
+                        <li><span class="highlight">Q_H</span>: الحرارة الممتصة من المصدر الساخن</li>
+                        <li><span class="highlight">Q_C</span>: الحرارة المطروحة للمصدر البارد</li>
+                        <li><span class="highlight">W</span>: الشغل المنتج</li>
+                    </ul>
+                </div>
+
+                <div class="law-box">
+                    <h3>كفاءة دورة كارنو (Carnot Efficiency)</h3>
+                    <div class="formula">η_Carnot = 1 - T_C/T_H</div>
+                    <p><strong>حيث:</strong></p>
+                    <ul>
+                        <li><span class="highlight">T_H</span>: درجة حرارة المصدر الساخن (K)</li>
+                        <li><span class="highlight">T_C</span>: درجة حرارة المصدر البارد (K)</li>
+                    </ul>
+                    <div class="note">
+                        دورة كارنو تمثل أعلى كفاءة ممكنة لمحرك حراري يعمل بين درجتي حرارة معينتين
+                    </div>
+                </div>
+
+                <div class="law-box">
+                    <h3>معامل الأداء للثلاجة (COP - Refrigerator)</h3>
+                    <div class="formula">COP_R = Q_C/W = Q_C/(Q_H - Q_C) = 1/(Q_H/Q_C - 1)</div>
+                    <div class="formula">COP_Carnot,R = T_C/(T_H - T_C)</div>
+                </div>
+
+                <div class="law-box">
+                    <h3>معامل الأداء للمضخة الحرارية (COP - Heat Pump)</h3>
+                    <div class="formula">COP_HP = Q_H/W = Q_H/(Q_H - Q_C)</div>
+                    <div class="formula">COP_Carnot,HP = T_H/(T_H - T_C)</div>
+                </div>
+            </div>
+
+            <!-- قانون الغاز المثالي -->
+            <div class="section">
+                <h2>💨 قوانين الغازات المثالية (Ideal Gas Laws)</h2>
+
+                <div class="law-box">
+                    <h3>قانون الغاز المثالي</h3>
+                    <div class="formula">PV = nRT</div>
+                    <div class="formula">PV = mRT/M</div>
+                    <p><strong>حيث:</strong></p>
+                    <ul>
+                        <li><span class="highlight">P</span>: الضغط (Pressure) - Pa</li>
+                        <li><span class="highlight">V</span>: الحجم (Volume) - m³</li>
+                        <li><span class="highlight">n</span>: عدد المولات (Number of moles)</li>
+                        <li><span class="highlight">R</span>: ثابت الغاز العام = 8.314 J/(mol·K)</li>
+                        <li><span class="highlight">T</span>: درجة الحرارة المطلقة (K)</li>
+                        <li><span class="highlight">m</span>: الكتلة (kg)</li>
+                        <li><span class="highlight">M</span>: الكتلة المولية (kg/mol)</li>
+                    </ul>
+                </div>
+
+                <div class="law-box">
+                    <h3>الطاقة الداخلية للغاز المثالي</h3>
+                    <div class="formula">U = nC_vT</div>
+                    <div class="formula">ΔU = nC_vΔT</div>
+                </div>
+
+                <div class="law-box">
+                    <h3>الإنثالبيا (Enthalpy)</h3>
+                    <div class="formula">H = U + PV</div>
+                    <div class="formula">ΔH = nC_pΔT</div>
+                </div>
+
+                <div class="law-box">
+                    <h3>علاقة ماير (Mayer's Relation)</h3>
+                    <div class="formula">C_p - C_v = R</div>
+                    <div class="formula">γ = C_p/C_v</div>
+                    <p><span class="highlight">γ</span>: نسبة الحرارات النوعية (غاز أحادي الذرة: γ = 1.67، غاز ثنائي الذرة: γ = 1.4)</p>
+                </div>
+            </div>
+
+            <!-- العمليات الترموديناميكية -->
+            <div class="section">
+                <h2>🔄 العمليات الترموديناميكية (Thermodynamic Processes)</h2>
+
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>العملية</th>
+                                <th>الشرط</th>
+                                <th>العلاقة</th>
+                                <th>الشغل W</th>
+                                <th>الحرارة Q</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>متساوية الحرارة (Isothermal)</strong></td>
+                                <td>T = ثابت</td>
+                                <td>PV = ثابت</td>
+                                <td>W = nRT ln(V₂/V₁)</td>
+                                <td>Q = W</td>
+                            </tr>
+                            <tr>
+                                <td><strong>متساوية الحجم (Isochoric)</strong></td>
+                                <td>V = ثابت</td>
+                                <td>P/T = ثابت</td>
+                                <td>W = 0</td>
+                                <td>Q = nC_vΔT</td>
+                            </tr>
+                            <tr>
+                                <td><strong>متساوية الضغط (Isobaric)</strong></td>
+                                <td>P = ثابت</td>
+                                <td>V/T = ثابت</td>
+                                <td>W = P(V₂ - V₁)</td>
+                                <td>Q = nC_pΔT</td>
+                            </tr>
+                            <tr>
+                                <td><strong>أديباتية (Adiabatic)</strong></td>
+                                <td>Q = 0</td>
+                                <td>PVᵞ = ثابت<br>TVᵞ⁻¹ = ثابت</td>
+                                <td>W = (P₁V₁ - P₂V₂)/(γ-1)</td>
+                                <td>Q = 0</td>
+                            </tr>
+                            <tr>
+                                <td><strong>متعددة الحدود (Polytropic)</strong></td>
+                                <td>PVⁿ = ثابت</td>
+                                <td>PVⁿ = ثابت</td>
+                                <td>W = (P₁V₁ - P₂V₂)/(n-1)</td>
+                                <td>Q = ΔU + W</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="law-box">
+                    <h3>الشغل في العمليات العامة</h3>
+                    <div class="formula">W = ∫P dV</div>
+                    <div class="formula">W = Area under P-V curve</div>
+                </div>
+            </div>
+
+            <!-- دورات الآلات الحرارية -->
+            <div class="section">
+                <h2>🔁 دورات الآلات الحرارية (Thermodynamic Cycles)</h2>
+
+                <div class="law-box">
+                    <h3>دورة كارنو (Carnot Cycle)</h3>
+                    <p><strong>أربع مراحل:</strong></p>
+                    <ol>
+                        <li>تمدد متساوي الحرارة عند T_H: W₁ = nRT_H ln(V₂/V₁)</li>
+                        <li>تمدد أديباتي: W₂ = nC_v(T_H - T_C)</li>
+                        <li>انضغاط متساوي الحرارة عند T_C: W₃ = nRT_C ln(V₃/V₄)</li>
+                        <li>انضغاط أديباتي: W₄ = nC_v(T_C - T_H)</li>
+                    </ol>
+                    <div class="formula">η_Carnot = 1 - T_C/T_H</div>
+                </div>
+
+                <div class="law-box">
+                    <h3>دورة أوتو (Otto Cycle) - محركات البنزين</h3>
+                    <p><strong>أربع مراحل:</strong></p>
+                    <ol>
+                        <li>سحب متساوي الضغط</li>
+                        <li>انضغاط أديباتي</li>
+                        <li>احتراق متساوي الحجم</li>
+                        <li>تمدد أديباتي</li>
+                    </ol>
+                    <div class="formula">η_Otto = 1 - 1/r^(γ-1)</div>
+                    <p>حيث <span class="highlight">r</span> هي نسبة الانضغاط (Compression Ratio) = V₁/V₂</p>
+                </div>
+
+                <div class="law-box">
+                    <h3>دورة ديزل (Diesel Cycle)</h3>
+                    <div class="formula">η_Diesel = 1 - [1/r^(γ-1)] × [(r_c^γ - 1)/(γ(r_c - 1))]</div>
+                    <p>حيث:</p>
+                    <ul>
+                        <li><span class="highlight">r</span>: نسبة الانضغاط</li>
+                        <li><span class="highlight">r_c</span>: نسبة القطع (Cut-off Ratio) = V₃/V₂</li>
+                    </ul>
+                </div>
+
+                <div class="law-box">
+                    <h3>دورة برايتون (Brayton Cycle) - التوربينات الغازية</h3>
+                    <div class="formula">η_Brayton = 1 - 1/r_p^((γ-1)/γ)</div>
+                    <p>حيث <span class="highlight">r_p</span> هي نسبة الضغط (Pressure Ratio) = P₂/P₁</p>
+                </div>
+
+                <div class="law-box">
+                    <h3>دورة رانكين (Rankine Cycle) - محطات البخار</h3>
+                    <div class="formula">η_Rankine = (W_turbine - W_pump)/(Q_in)</div>
+                    <div class="formula">η_Rankine = (h₃ - h₄ - (h₂ - h₁))/(h₃ - h₂)</div>
+                </div>
+            </div>
+
+            <!-- معادلات انتقال الحرارة -->
+            <div class="section">
+                <h2>🌡️ معادلات انتقال الحرارة (Heat Transfer)</h2>
+
+                <div class="law-box">
+                    <h3>التوصيل الحراري (Conduction)</h3>
+                    <div class="formula">Q̇ = -kA(dT/dx)</div>
+                    <div class="formula">Q̇ = kA(T₁ - T₂)/L</div>
+                    <p><strong>حيث:</strong></p>
+                    <ul>
+                        <li><span class="highlight">Q̇</span>: معدل انتقال الحرارة (W)</li>
+                        <li><span class="highlight">k</span>: معامل التوصيل الحراري (W/m·K)</li>
+                        <li><span class="highlight">A</span>: المساحة (m²)</li>
+                        <li><span class="highlight">L</span>: السماكة (m)</li>
+                    </ul>
+                </div>
+
+                <div class="law-box">
+                    <h3>الحمل الحراري (Convection)</h3>
+                    <div class="formula">Q̇ = hA(T_s - T_∞)</div>
+                    <p><span class="highlight">h</span>: معامل الحمل الحراري (W/m²·K)</p>
+                </div>
+
+                <div class="law-box">
+                    <h3>الإشعاع الحراري (Radiation)</h3>
+                    <div class="formula">Q̇ = εσA(T₁⁴ - T₂⁴)</div>
+                    <p><strong>حيث:</strong></p>
+                    <ul>
+                        <li><span class="highlight">ε</span>: معامل الانبعاث (Emissivity)</li>
+                        <li><span class="highlight">σ</span>: ثابت ستيفان-بولتزمان = 5.67×10⁻⁸ W/m²·K⁴</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- خصائص الموائع الترموديناميكية -->
+            <div class="section">
+                <h2>💧 خصائص الموائع الترموديناميكية (Thermodynamic Properties)</h2>
+
+                <div class="law-box">
+                    <h3>السعة الحرارية النوعية (Specific Heat)</h3>
+                    <div class="formula">C_p = (∂h/∂T)_P (عند ضغط ثابت)</div>
+                    <div class="formula">C_v = (∂u/∂T)_V (عند حجم ثابت)</div>
+                </div>
+
+                <div class="law-box">
+                    <h3>معاملات الانضغاط والتمدد</h3>
+                    <div class="formula">β = (1/V)(∂V/∂T)_P (معامل التمدد الحجمي)</div>
+                    <div class="formula">κ = -(1/V)(∂V/∂P)_T (معامل الانضغاط الحراري)</div>
+                </div>
+
+                <div class="law-box">
+                    <h3>علاقات ماكسويل (Maxwell Relations)</h3>
+                    <div class="formula">(∂T/∂V)_S = -(∂P/∂S)_V</div>
+                    <div class="formula">(∂T/∂P)_S = (∂V/∂S)_P</div>
+                    <div class="formula">(∂S/∂V)_T = (∂P/∂T)_V</div>
+                    <div class="formula">(∂S/∂P)_T = -(∂V/∂T)_P</div>
+                </div>
+            </div>
+
+            <!-- قوانين إضافية -->
+            <div class="section">
+                <h2>📊 قوانين ومعادلات إضافية</h2>
+
+                <div class="law-box">
+                    <h3>القانون الثالث للديناميكا الحرارية</h3>
+                    <p>عند الصفر المطلق (T = 0 K)، الإنتروبيا لبلورة مثالية تساوي صفر</p>
+                    <div class="formula">lim(T→0) S = 0</div>
+                </div>
+
+                <div class="law-box">
+                    <h3>طاقة جيبس الحرة (Gibbs Free Energy)</h3>
+                    <div class="formula">G = H - TS</div>
+                    <div class="formula">dG = VdP - SdT</div>
+                </div>
+
+                <div class="law-box">
+                    <h3>طاقة هلمهولتز الحرة (Helmholtz Free Energy)</h3>
+                    <div class="formula">F = U - TS</div>
+                    <div class="formula">dF = -PdV - SdT</div>
+                </div>
+
+                <div class="law-box">
+                    <h3>معادلة فان دير فالس للغازات الحقيقية</h3>
+                    <div class="formula">(P + a/V²)(V - b) = RT</div>
+                    <p>حيث a و b ثوابت تعتمد على نوع الغاز</p>
+                </div>
+
+                <div class="law-box">
+                    <h3>معامل جول-طومسون</h3>
+                    <div class="formula">μ_JT = (∂T/∂P)_H</div>
+                    <p>يصف التغير في درجة الحرارة عند التمدد الخانق</p>
+                </div>
+            </div>
+
+            <!-- ثوابت فيزيائية هامة -->
+            <div class="section">
+                <h2>🔢 ثوابت فيزيائية هامة</h2>
+
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>الثابت</th>
+                                <th>الرمز</th>
+                                <th>القيمة</th>
+                                <th>الوحدة</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>ثابت الغاز العام</td>
+                                <td>R</td>
+                                <td>8.314</td>
+                                <td>J/(mol·K)</td>
+                            </tr>
+                            <tr>
+                                <td>ثابت بولتزمان</td>
+                                <td>k_B</td>
+                                <td>1.381 × 10⁻²³</td>
+                                <td>J/K</td>
+                            </tr>
+                            <tr>
+                                <td>ثابت أفوجادرو</td>
+                                <td>N_A</td>
+                                <td>6.022 × 10²³</td>
+                                <td>1/mol</td>
+                            </tr>
+                            <tr>
+                                <td>ثابت ستيفان-بولتزمان</td>
+                                <td>σ</td>
+                                <td>5.670 × 10⁻⁸</td>
+                                <td>W/(m²·K⁴)</td>
+                            </tr>
+                            <tr>
+                                <td>الصفر المطلق</td>
+                                <td>-</td>
+                                <td>-273.15</td>
+                                <td>°C</td>
+                            </tr>
+                            <tr>
+                                <td>الضغط الجوي القياسي</td>
+                                <td>P₀</td>
+                                <td>101,325</td>
+                                <td>Pa</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+        <footer>
+            <p>📚 ملخص شامل لقوانين الآلات الحرارية | Thermodynamic Machines Laws Reference</p>
+            <p>© 2025 - جميع الحقوق محفوظة</p>
+        </footer>
+    </div>
+
+    <script>
+        // البحث في المحتوى
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const sections = document.querySelectorAll('.section');
+
+            sections.forEach(section => {
+                const text = section.textContent.toLowerCase();
+                if (text.includes(searchTerm) || searchTerm === '') {
+                    section.style.display = 'block';
+                } else {
+                    section.style.display = 'none';
+                }
+            });
+        });
+
+        // إضافة تأثير التمرير السلس
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // طباعة الصفحة
+        function printPage() {
+            window.print();
+        }
+    </script>
+</body>
+</html>
